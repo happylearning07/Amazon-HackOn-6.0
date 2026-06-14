@@ -1,3 +1,5 @@
+const API_BASE = 'https://secondlife-backend-dzl6.onrender.com'
+
 export async function gradeItem(imageFile, formData) {
   const body = new FormData()
   body.append('file', imageFile)
@@ -7,7 +9,7 @@ export async function gradeItem(imageFile, formData) {
   body.append('asin', formData.asin || '')
   body.append('seller_id', formData.sellerId)
 
-  const response = await fetch('/api/grade', {
+  const response = await fetch(`${API_BASE}/api/grade`, {
     method: 'POST',
     body,
   })
@@ -30,7 +32,7 @@ export async function routeItem(listingId, action) {
   const body = new FormData()
   body.append('action', action)
 
-  const response = await fetch(`/api/route/${listingId}`, {
+  const response = await fetch(`${API_BASE}/api/route/${listingId}`, {
     method: 'POST',
     body,
   })
@@ -43,7 +45,7 @@ export async function routeItem(listingId, action) {
 }
 
 export async function fetchMarketplace() {
-  const response = await fetch('/api/marketplace')
+  const response = await fetch(`${API_BASE}/api/marketplace`)
   if (!response.ok) {
     throw new Error('Could not load marketplace')
   }
@@ -52,7 +54,7 @@ export async function fetchMarketplace() {
 }
 
 export async function fetchSeller(sellerId) {
-  const response = await fetch(`/api/seller/${sellerId}`)
+  const response = await fetch(`${API_BASE}/api/seller/${sellerId}`)
   if (!response.ok) {
     throw new Error('Could not load seller profile')
   }
